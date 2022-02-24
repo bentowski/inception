@@ -4,7 +4,7 @@ RUN	apt update \
 	&& apt upgrade -y \
 	&& apt install -y php7.3-fpm php-mysql mariadb-client tar wget
 
-WORKDIR /var/www
+WORKDIR /var/www/
 
 RUN	wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
