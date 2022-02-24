@@ -14,4 +14,4 @@ RUN	openssl req -x509 -nodes -days 1 -newkey rsa:2048 \
 
 CMD nginx -g "daemon off;"
 
-EXPOSE 8080
+EXPOSE 443

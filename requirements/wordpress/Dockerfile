@@ -14,7 +14,7 @@ RUN	wget https://wordpress.org/latest.tar.gz \
 
 #CMD	bash wp_install.sh
 
-COPY	conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+#COPY	conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 RUN	mkdir -p /run/php && mkdir /var/log/php-fpm
 

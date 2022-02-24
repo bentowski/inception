@@ -1,13 +1,41 @@
 version: '3'
 
+volumes:
+  wp_volume:
+   driver: local
+   driver_opts:
+    o: bind
+    type: volume
+    device: /home/bbaudry/data/wp_inception
+
 services:
  nginx:
   container_name: nginx
-  env_file: ./.env
+  depends_on:
+   - wordpress
   build:
    context: ./requirements/nginx
    dockerfile: Dockerfile
+#  volumes:
+#   - wp_volumes:/var/www
   ports:
    - "443:443"
-  restart: on-failure
+  networks:
+   - network
 
+ wordpress:
+  container_name: wordpress
+  build:
+   context: ./requirements/wordpress
+   dockerfile: Dockerfile
+  volumes:
+   - wp_volume:/var/www
+  ports:
+   - "9000:9000"
+  working_dir: /var/www
+  networks:
+   - network
+
+networks:
+ network:
+   name: inception
