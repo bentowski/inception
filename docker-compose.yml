@@ -9,20 +9,8 @@ volumes:
     device: /home/bbaudry/data/wp_inception
 
 services:
- wordpress:
-  container_name: wordpress
-  build:
-   context: ./requirements/wordpress
-   dockerfile: Dockerfile
-  volumes:
-   - wp_volume:/var/www/
-  ports:
-   - "9000:9000"
-  working_dir: /var/www/
-  networks:
-   - network
-
  nginx:
+  image: nginx:v0
   container_name: nginx
   depends_on:
    - wordpress
@@ -30,12 +18,25 @@ services:
    context: ./requirements/nginx
    dockerfile: Dockerfile
   volumes:
-   - wp_volume:/var/www/
+   - wp_volume:/var/www
   ports:
-   - "443:443"
+   - 80:80
   networks:
-   - network
+   - inception
+
+ wordpress:
+  image: wordpress:v0
+  container_name: wordpress
+  build:
+   context: ./requirements/wordpress
+   dockerfile: Dockerfile
+  volumes:
+   - wp_volume:/var/www
+  ports:
+   - 9000:9000
+  working_dir: /var/www/
+  networks:
+   - inception
 
 networks:
- network:
-   name: inception
+ inception:
