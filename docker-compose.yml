@@ -7,11 +7,24 @@ volumes:
     o: bind
     type: volume
     device: /home/bbaudry/data/wp_inception
+  db_volume:
+   driver: local
+   driver_opts:
+    o: bind
+    type: volume
+    device: /home/bbaudry/data/db_inception
+  test:
+   driver: local
+   driver_opts:
+    o: bind
+    type: volume
+    device: /home/bbaudry/data/test
 
 services:
  nginx:
   image: nginx:v0
   container_name: nginx
+  env_file: ./.env
   depends_on:
    - wordpress
   build:
@@ -27,6 +40,9 @@ services:
  wordpress:
   image: wordpress:v0
   container_name: wordpress
+  env_file: ./.env
+  depends_on:
+   - mariadb
   build:
    context: ./requirements/wordpress
    dockerfile: Dockerfile
@@ -35,6 +51,21 @@ services:
   ports:
    - 9000:9000
   working_dir: /var/www
+  networks:
+   - inception
+
+ mariadb:
+  image: mariadb:v0
+  container_name: mariadb
+  env_file: ./.env
+  build:
+   context: ./requirements/mariadb
+   dockerfile: Dockerfile
+  ports:
+   - 3306:3306
+  volumes:
+   - db_volume:/var/lib/mysql
+   - test:/etc/mysql
   networks:
    - inception
 

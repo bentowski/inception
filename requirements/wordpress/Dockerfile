@@ -1,4 +1,4 @@
-FROM debian:10
+FROM debian:buster
 
 RUN	apt update \
 	&& apt upgrade -y \
@@ -9,10 +9,6 @@ WORKDIR /var/www/
 RUN	wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
 	&& rm -rf latest.tar.gz
-
-#COPY	tools/wp_install.sh wp_install.sh
-
-#CMD	bash wp_install.sh
 
 COPY	conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
