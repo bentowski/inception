@@ -57,7 +57,12 @@ services:
  mariadb:
   image: mariadb:v0
   container_name: mariadb
-  env_file: ./.env
+#  env_file: ./.env
+  environment:
+   MYSQL_ROOT_PASSWORD: myrootpassword
+   MYSQL_DATABASE: mydatabase
+   MYSQL_USER: myuser
+   MYSQL_PASSWORD: myuserpassword
   build:
    context: ./requirements/mariadb
    dockerfile: Dockerfile
