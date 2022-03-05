@@ -6,9 +6,12 @@ RUN	apt update && apt upgrade -y \
 	&& chown -R www-data:www-data /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
 
-COPY ./tools/create_db.sh ./
+COPY ./tools/create_db.sh /bin/
 COPY ./conf/my.cnf /etc/mysql/my.cnf
 
-CMD sh create_db.sh
+RUN chmod 775 /etc/mysql/my.cnf
+RUN chmod -R 775 /var/lib/mysql
+
+CMD sh /bin/create_db.sh
 
 EXPOSE 3306

@@ -11,6 +11,7 @@ RUN	wget https://wordpress.org/latest.tar.gz \
 	&& rm -rf latest.tar.gz
 
 COPY	conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+#COPY	conf/wp-config.php /var/www/wordpress
 
 RUN	ls  /etc/php/7.3/fpm/pool.d/
 
