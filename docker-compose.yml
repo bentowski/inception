@@ -6,13 +6,13 @@ volumes:
    driver_opts:
     o: bind
     type: volume
-    device: ~/data/wp_inception
+    device: /home/bbaudry/data/wp_inception
   db_volume:
    driver: local
    driver_opts:
     o: bind
     type: volume
-    device: ~/data/db_inception
+    device: /home/bbaudry/data/db_inception
 
 services:
  nginx:
