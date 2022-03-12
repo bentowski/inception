@@ -28,7 +28,7 @@ define('DB_PASSWORD', getenv('WP_USER_PASSWORD'));
 /** MySQL hostname */
 define('DB_HOST', getenv('MYSQL_NAME'));
 /** Database Charset to use in creating database tables. */
-define( 'DB_CHARSET', 'utf8' );
+define( 'DB_CHARSET', 'utf8mb4' );
 /** The Database Collate type. Do not change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
@@ -60,7 +60,7 @@ define( 'NONCE_SALT',       '0u2W#o(C9nLx(iXXHf`oizlISNUjWC3 pKCD]&]hE>v=]+fab:+
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = getenv('WP_TABLE_PREFIX');
+$table_prefix = 'wp_';
 
 /**
  * For developers: WordPress debugging mode.
@@ -89,7 +89,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define('CONCATENATE_SCRIPTS', false);
 
-define('WP_SITEURL', 'http://'.$_SERVER['HTTP_HOST']);
 define('WP_HOME', 'http://'.$_SERVER['HTTP_HOST']);
 
 /** Sets up WordPress vars and included files. */
