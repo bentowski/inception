@@ -10,6 +10,8 @@ RUN	chown -R www-data:www-data /var/www/ && chmod 755 /var/www/
 	#&& sudo certbot --nginx-d www.bbaudry.42.fr
 
 COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY	conf/nginx.conf /etc/nginx/sites-available/bbaudry.42.fr
+COPY	conf/nginx.conf /etc/nginx/sites-enable/bbaudry.42.fr
 
 #WORKDIR /etc/nginx/ssl/
 
