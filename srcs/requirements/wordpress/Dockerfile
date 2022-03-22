@@ -2,7 +2,10 @@ FROM debian:buster
 
 RUN	apt update \
 	&& apt upgrade -y \
-	&& apt install -y php7.3-fpm php-mysql mariadb-client tar wget
+	&& apt install -y php7.3-fpm php-mysql mariadb-client tar wget curl\
+	&& curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& chmod +x wp-cli.phar \
+	&& mv wp-cli.phar /usr/local/bin/wp
 
 WORKDIR /var/www/
 
@@ -10,13 +13,23 @@ RUN	wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
 	&& rm -rf latest.tar.gz
 
+COPY	tools/config.sh ./
 COPY	conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY	conf/wp-config.php /var/www/wordpress/wp-config.php
+
+#WORKDIR ./wordpress
+
+#RUN	wp core config --path='/var/www/wordpress' --dbhost=${DOMAIN_NAME} --dbname=${WP_DB_NAME} --dbuser=${WP_USER} --dbpass=${WP_USER_PASSWORD} --allow-root
+#RUN	chmod 644 /var/www/wordpress/wp-config.php
 
 RUN	ls  /etc/php/7.3/fpm/pool.d/
 
 RUN	mkdir -p /run/php && mkdir /var/log/php7.3-fpm
 
+#RUN	wp core install --path='/var/www/wordpress' --url=bbaudry.42.fr --title="Inception" --admin_name=user42 --admin_password=user42 --admin_email=bbaudry@student.42.fr --allow-root
+
 EXPOSE	9000
+
+CMD sh config.sh
 
 ENTRYPOINT /usr/sbin/php-fpm7.3 -F

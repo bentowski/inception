@@ -1,12 +1,8 @@
-NAME = inception
-
 DC_FILE = ./srcs/docker-compose.yml
 
 DOCKER_COMPOSE = docker-compose -p inception --file $(DC_FILE)
 
-all: $(NAME)
-
-$(NAME): volumes
+all: volumes
 	$(DOCKER_COMPOSE) up -d --build
 
 volumes:
