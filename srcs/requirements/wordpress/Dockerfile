@@ -30,6 +30,4 @@ RUN	mkdir -p /run/php && mkdir /var/log/php7.3-fpm
 
 EXPOSE	9000
 
-CMD sh config.sh
-
-ENTRYPOINT /usr/sbin/php-fpm7.3 -F
+ENTRYPOINT sh config.sh

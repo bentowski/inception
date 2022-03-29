@@ -8,11 +8,6 @@ RUN	apt update && apt upgrade -y \
 
 COPY ./tools/create_db.sh /bin/
 COPY ./conf/my.cnf /etc/mysql/my.cnf
-COPY ./conf/ibdata1 /var/lib/mysql/ibdata1
-COPY ./conf/wp_options.ibd /var/lib/mysql/db_name/wp_options.ibd
-COPY ./conf/wp_users.ibd /var/lib/mysql/db_name/wp_users.ibd
-COPY ./conf/wp_posts.ibd /var/lib/mysql/db_name/wp_posts.ibd
-COPY ./conf/wp_usermeta.ibd /var/lib/mysql/db_name/wp_usermeta.ibd
 
 RUN chmod 775 /etc/mysql/my.cnf
 RUN chmod -R 775 /var/lib/mysql

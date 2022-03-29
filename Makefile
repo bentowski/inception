@@ -10,6 +10,9 @@ volumes:
 	mkdir -p ~/data/wp_inception
 	mkdir -p ~/data/db_inception
 
+up:
+	$(DOCKER_COMPOSE) up -d
+
 down:
 	$(DOCKER_COMPOSE) down
 
