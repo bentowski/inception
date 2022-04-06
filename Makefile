@@ -21,7 +21,7 @@ clear_volume: down
 	docker volume rm inception_wp_volume
 
 clear: clear_volume
-	docker system prune -a
+	docker system prune -af
 	sudo rm -rf ~/data/
 
 re: clear all
