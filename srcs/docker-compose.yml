@@ -6,7 +6,7 @@ volumes:
    driver_opts:
     o: bind
     type: volume
-    device: ./srcs/requirements/wordpress/wordpress
+    device: ~/data/wp_inception
   db_volume:
    driver: local
    driver_opts:

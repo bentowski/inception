@@ -12,10 +12,11 @@ RUN	apt update \
 RUN useradd --create-home bentowski
 WORKDIR /var/www/
 
-# RUN	wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz \
-# 	&& tar -xzvf wordpress-6.2.2-fr_FR.tar.gz \
-# 	&& rm -rf wordpress-6.2.2-fr_FR.tar.gz \
-COPY wordpress/ ./
+RUN	wget https://fr.wordpress.org/wordpress-6.2.2-fr_FR.tar.gz \
+	&& tar -xzvf wordpress-6.2.2-fr_FR.tar.gz \
+	&& rm -rf wordpress-6.2.2-fr_FR.tar.gz 
+# COPY wordpress/ ./
+# RUN chmod 777 ./
 # RUN chown -R bentowski ./
 
 COPY	tools/config.sh ./
